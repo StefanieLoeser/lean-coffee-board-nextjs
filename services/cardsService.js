@@ -12,7 +12,6 @@ export async function getAllCards() {
     }
   );
 
-  console.log(cardsArray, 'Array');
   return cardsArray;
 }
 
