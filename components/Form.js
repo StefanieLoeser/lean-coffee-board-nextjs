@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { BsPlusCircleFill } from 'react-icons/bs';
 
 export default function Form({ onAddCard }) {
-  function handleSubmit(event) {
+
+  async function handleSubmit(event) {
     event.preventDefault();
 
     const form = event.target;
@@ -12,10 +13,17 @@ export default function Form({ onAddCard }) {
     const name = form.name.value;
 
     const newCard = {
-      id: nanoid(),
       text: text,
       name: name,
     };
+
+    await fetch('/api/cards/create', {
+      method: 'POST', 
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(newCard),
+    })
 
     onAddCard(newCard);
 
