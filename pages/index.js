@@ -18,13 +18,15 @@ export async function getServerSideProps() {
 
 export default function Home({cards}) {
   const [cardList, setCardList] = useState(cards);
-console.log(cardList);
 
   function addCard(newCard) {
     setCardList([newCard, ...cardList]);
   }
 
-  function removeCard(id) {
+  async function removeCard(id) {
+    await fetch(`api/cards/${id}`, {
+      method: 'DELETE',
+    });
     setCardList(cardList.filter((card) => card.id !== id));
   }
 
